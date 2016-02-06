@@ -1,0 +1,384 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Seq.Apps</name>
+    </assembly>
+    <members>
+        <member name="T:Seq.Apps.App">
+            <summary>
+            A running Seq app (instance).
+            </summary>
+        </member>
+        <member name="M:Seq.Apps.App.#ctor(System.Collections.Generic.IReadOnlyDictionary{System.String,System.String},System.String)">
+            <summary>
+            Create an app.
+            </summary>
+            <param name="settings">Settings applied to the app.</param>
+            <param name="storagePath">A folder in which the app may store data.</param>
+        </member>
+        <member name="M:Seq.Apps.App.GetSetting``1(System.String)">
+            <summary>
+            Get a required setting.
+            </summary>
+            <typeparam name="T">The setting type.</typeparam>
+            <param name="name">The setting name.</param>
+            <returns>The setting.</returns>
+        </member>
+        <member name="M:Seq.Apps.App.GetSetting``1(System.String,``0)">
+            <summary>
+            Get an optional setting.
+            </summary>
+            <typeparam name="T">The setting type.</typeparam>
+            <param name="name">The setting name.</param>
+            <param name="defaultValue">The value to use if no explicit value is provided.</param>
+            <returns>The setting.</returns>
+        </member>
+        <member name="P:Seq.Apps.App.Settings">
+            <summary>
+            Settings applied to the app.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.App.StoragePath">
+            <summary>
+            A folder in which the app may store data.
+            </summary>
+        </member>
+        <member name="T:Seq.Apps.Event`1">
+            <summary>
+            Represents a Seq event, with a strongly-typed payload.
+            </summary>
+            <typeparam name="TData">The payload type.</typeparam>
+        </member>
+        <member name="M:Seq.Apps.Event`1.#ctor(System.String,System.UInt32,System.DateTime,`0)">
+            <summary>
+            Create an event with the specified parameters.
+            </summary>
+            <param name="id">The event ID.</param>
+            <param name="eventType">The event type.</param>
+            <param name="timestampUtc">The </param>
+            <param name="data"></param>
+        </member>
+        <member name="P:Seq.Apps.Event`1.EventType">
+            <summary>
+            The Seq event type for the event. For Serilog events this is calculated
+            from the message template.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.Event`1.TimestampUtc">
+            <summary>
+            The UTC timestamp at which the event was created.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.Event`1.Data">
+            <summary>
+            The event payload.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.Event`1.Id">
+            <summary>
+            The Seq event ID.
+            </summary>
+        </member>
+        <member name="T:Seq.Apps.Host">
+            <summary>
+            Represents the Seq instance running the app.
+            </summary>
+        </member>
+        <member name="M:Seq.Apps.Host.#ctor(System.String[],System.String)">
+            <summary>
+            Create a <see cref="T:Seq.Apps.Host"/>.
+            </summary>
+            <param name="instanceName">The name of the Seq instance, or null.</param>
+            <param name="listenUris">The URIs at which the server is listening.</param>
+        </member>
+        <member name="P:Seq.Apps.Host.InstanceName">
+            <summary>
+            The name of the Seq instance, or null.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.Host.ListenUris">
+            <summary>
+            The URIs at which the server is listening.
+            </summary>
+        </member>
+        <member name="T:Seq.Apps.IAppHost">
+            <summary>
+            Link from a reactor back to the process in which it is running.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.IAppHost.App">
+            <summary>
+            The app being run.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.IAppHost.Host">
+            <summary>
+            The host running the app.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.IAppHost.Logger">
+            <summary>
+            A logger through which the app can raise events.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.IAppHost.StoragePath">
+            <summary>
+            A folder in which the app may store data.
+            </summary>
+        </member>
+        <member name="T:Seq.Apps.ISubscribeTo`1">
+            <summary>
+            Subscribes a reactor to a typed event.
+            </summary>
+            <typeparam name="TData">The type representing event data.</typeparam>
+        </member>
+        <member name="M:Seq.Apps.ISubscribeTo`1.On(Seq.Apps.Event{`0})">
+            <summary>
+            Invoked when an event is sent to a reactor.
+            </summary>
+            <param name="evt">The event.</param>
+        </member>
+        <member name="T:Seq.Apps.LogEvents.LogEventData">
+            <summary>
+            Represents event data generated via log data.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.LogEvents.LogEventData.Id">
+            <summary>
+            The identifier assigned to the event by Seq.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.LogEvents.LogEventData.LocalTimestamp">
+            <summary>
+            The local timestamp at which the event was generated.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.LogEvents.LogEventData.Level">
+            <summary>
+            The level of the event.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.LogEvents.LogEventData.MessageTemplate">
+            <summary>
+            The template for the log event message.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.LogEvents.LogEventData.RenderedMessage">
+            <summary>
+            The rendered message.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.LogEvents.LogEventData.Exception">
+            <summary>
+            The exception associated with the event, or null.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.LogEvents.LogEventData.Properties">
+            <summary>
+            Structured properties associated with the event.
+            </summary>
+        </member>
+        <member name="T:Seq.Apps.LogEvents.LogEventLevel">
+            <summary>
+            Specifies the meaning and relative importance of a log event.
+            </summary>
+        </member>
+        <member name="F:Seq.Apps.LogEvents.LogEventLevel.Verbose">
+            <summary>
+            Anything and everything you might want to know about
+            a running block of code.
+            </summary>
+        </member>
+        <member name="F:Seq.Apps.LogEvents.LogEventLevel.Debug">
+            <summary>
+            Internal system events that aren't necessarily
+            observable from the outside.
+            </summary>
+        </member>
+        <member name="F:Seq.Apps.LogEvents.LogEventLevel.Information">
+            <summary>
+            The lifeblood of operational intelligence - things
+            happen.
+            </summary>
+        </member>
+        <member name="F:Seq.Apps.LogEvents.LogEventLevel.Warning">
+            <summary>
+            Service is degraded or endangered.
+            </summary>
+        </member>
+        <member name="F:Seq.Apps.LogEvents.LogEventLevel.Error">
+            <summary>
+            Functionality is unavailable, invariants are broken
+            or data is lost.
+            </summary>
+        </member>
+        <member name="F:Seq.Apps.LogEvents.LogEventLevel.Fatal">
+            <summary>
+            If you have a pager, it goes off when one of these
+            occurs.
+            </summary>
+        </member>
+        <member name="T:Seq.Apps.Reactor">
+            <summary>
+            A reactor is an object that reacts to events.
+            </summary>
+        </member>
+        <member name="M:Seq.Apps.Reactor.Attach(Seq.Apps.IAppHost)">
+            <summary>
+            Attach the reactor instance to the host.
+            </summary>
+            <param name="host">The host running the reactor.</param>
+        </member>
+        <member name="M:Seq.Apps.Reactor.OnAttached">
+            <summary>
+            Called after all configuration has completed, but before any
+            events are sent to the app.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.Reactor.App">
+            <summary>
+            The app to which the reactor belongs.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.Reactor.Host">
+            <summary>
+            The Seq instance running the app.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.Reactor.Log">
+            <summary>
+            A logger allowing the reactor to itself raise events.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.Reactor.StoragePath">
+            <summary>
+            A folder in which the app may store data.
+            </summary>
+        </member>
+        <member name="T:Seq.Apps.SeqAppAttribute">
+            <summary>
+            Marks the main <see cref="T:Seq.Apps.Reactor"/> type in a Seq app.
+            </summary>
+        </member>
+        <member name="M:Seq.Apps.SeqAppAttribute.#ctor(System.String)">
+            <summary>
+            Create a <see cref="T:Seq.Apps.SeqAppAttribute"/> describing the app.
+            </summary>
+            <param name="name">The name of the app, for example "Send Email".</param>
+        </member>
+        <member name="P:Seq.Apps.SeqAppAttribute.Name">
+            <summary>
+            The name of the app, for example "Send Email".
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.SeqAppAttribute.Description">
+            <summary>
+            An optional longer description of the app's purpose.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.SeqAppAttribute.AllowReprocessing">
+            <summary>
+            If set to true, instances of the app will be able to process the events that they
+            generate. If false (the default), events from each app instance will 
+            be filtered out of its own input.
+            </summary>
+        </member>
+        <member name="T:Seq.Apps.SeqAppException">
+            <summary>
+            Exception thrown by a Seq app
+            </summary>
+        </member>
+        <member name="M:Seq.Apps.SeqAppException.#ctor(System.String)">
+            <summary>
+            Create an instance of the exception with the provided message.
+            </summary>
+            <param name="message">The exception message.</param>
+        </member>
+        <member name="M:Seq.Apps.SeqAppException.#ctor(System.String,System.Exception)">
+            <summary>
+            Create an instance of the exception with the provided message and inner exception.
+            </summary>
+            <param name="message">The exception message.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="M:Seq.Apps.SeqAppException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Create an instance of the exception from serialized data.
+            </summary>
+            <param name="context">The streaming context.</param>
+            <param name="info">The serialization info.</param>
+        </member>
+        <member name="T:Seq.Apps.SeqAppSettingAttribute">
+            <summary>
+            Marks a property on a <see cref="T:Seq.Apps.Reactor"/> type as being provided by
+            the app user.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.SeqAppSettingAttribute.DisplayName">
+            <summary>
+            The user-friendly setting name, if this differs from the
+            name of the property.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.SeqAppSettingAttribute.HelpText">
+            <summary>
+            Optional text to display to the user when providing values.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.SeqAppSettingAttribute.IsOptional">
+            <summary>
+            If true, the user can provide null/blank/0 as an appropriate value.
+            </summary>
+        </member>
+        <member name="P:Seq.Apps.SeqAppSettingAttribute.InputType">
+            <summary>
+            The style of user input control that is used to edit the setting.
+            If not set, an appropriate input type will be chosen based on
+            the type of the property.
+            </summary>
+        </member>
+        <member name="T:Seq.Apps.SettingInputType">
+            <summary>
+            Specifies the user input control that displays and edits values
+            supplied for the setting.
+            </summary>
+        </member>
+        <member name="F:Seq.Apps.SettingInputType.Unspecified">
+            <summary>
+            The default value; determines an appropriate input
+            type based on the associated property.
+            </summary>
+        </member>
+        <member name="F:Seq.Apps.SettingInputType.Text">
+            <summary>
+            A single line of text.
+            </summary>
+        </member>
+        <member name="F:Seq.Apps.SettingInputType.LongText">
+            <summary>
+            A block of text possibly including newlines.
+            </summary>
+        </member>
+        <member name="F:Seq.Apps.SettingInputType.Checkbox">
+            <summary>
+            A Boolean yes/no checkbox.
+            </summary>
+        </member>
+        <member name="F:Seq.Apps.SettingInputType.Integer">
+            <summary>
+            A numeric input not accepting factional parts.
+            </summary>
+        </member>
+        <member name="F:Seq.Apps.SettingInputType.Decimal">
+            <summary>
+            A numeric input with a possible fractional part.
+            </summary>
+        </member>
+        <member name="F:Seq.Apps.SettingInputType.Password">
+            <summary>
+            A single line of text that is written but never read or
+            displayed.
+            </summary>
+        </member>
+    </members>
+</doc>
