@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using InfluxData.Net.Common.Enums;
 using InfluxData.Net.InfluxDb;
 using InfluxData.Net.InfluxDb.Models;
@@ -16,11 +18,18 @@ namespace Seq.App.InfluxDB
     {
         private InfluxDbClient _influxManager;
 
+        private BlockingCollection<Point> _pointsCollection { get; set; }
+
         private Dictionary<string, object> _tags = new Dictionary<string, object>();
 
         private List<string> _propertiesToIncludeAsTags = new List<string>(); 
 
-        private List<string> _propertiesToIncludeAsFields = new List<string>(); 
+        private List<string> _propertiesToIncludeAsFields = new List<string>();
+
+        public InfluxDBReactor()
+        {
+            _pointsCollection = new BlockingCollection<Point>();
+        }
 
         protected override void OnAttached()
         {
@@ -47,6 +56,8 @@ namespace Seq.App.InfluxDB
                     _propertiesToIncludeAsTags =
                         PropertiesAsTags.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).ToList();
                 }
+
+                RegisterReadingsQueueHandler();
             }
             catch (Exception ex)
             {
@@ -138,12 +149,47 @@ namespace Seq.App.InfluxDB
 
                 Log.Information("Writing to InfluxDB {@Point}", pointToWrite);
 
-                var response = _influxManager.Client.WriteAsync(Database, pointToWrite);
-                response.Wait();
+
+                _pointsCollection.Add(pointToWrite);
             }
             catch (Exception ex)
             {
                 Log.Error(ex, "Error when sending measurement to InfluxDB");
+            }
+        }
+
+        private async Task RegisterReadingsQueueHandler()
+        {
+            while (true)
+            {
+                await Task.Delay(1000);
+                HandleReadingsQueue();
+            }
+        }
+
+        private async Task HandleReadingsQueue()
+        {
+            var readingsCount = _pointsCollection.Count;
+            IList<Point> readings = new List<Point>();
+
+            for (var i = 0; i < readingsCount; i++)
+            {
+                Point reading;
+                var dequeueSuccess = _pointsCollection.TryTake(out reading);
+
+                if (dequeueSuccess)
+                {
+                    readings.Add(reading);
+                }
+                else
+                {
+                    throw new Exception("Could not dequeue the collection");
+                }
+            }
+
+            if (readings.Count > 0)
+            {
+                await _influxManager.Client.WriteAsync(Database, readings);
             }
         }
     }
