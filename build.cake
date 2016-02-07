@@ -35,12 +35,12 @@ var globalAssemblyFile = srcDir + File("GlobalAssemblyInfo.cs");
 Setup(() =>
 {
     Information("");
-    Information("██████╗  █████╗ ██████╗  ██████╗ ██████╗ ██████╗ ███████╗");
-    Information("██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔═══██╗██╔══██╗██╔════╝");
-    Information("██████╔╝███████║██████╔╝██║     ██║   ██║██║  ██║█████╗  ");
-    Information("██╔══██╗██╔══██║██╔══██╗██║     ██║   ██║██║  ██║██╔══╝  ");
-    Information("██████╔╝██║  ██║██║  ██║╚██████╗╚██████╔╝██████╔╝███████╗");
-    Information("╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝");
+    Information("███████╗███████╗ ██████╗     █████╗ ██████╗ ██████╗ ██╗███╗   ██╗███████╗██╗     ██╗   ██╗██╗  ██╗██████╗ ██████╗ ");
+    Information("██╔════╝██╔════╝██╔═══██╗   ██╔══██╗██╔══██╗██╔══██╗██║████╗  ██║██╔════╝██║     ██║   ██║╚██╗██╔╝██╔══██╗██╔══██╗");
+    Information("███████╗█████╗  ██║   ██║   ███████║██████╔╝██████╔╝██║██╔██╗ ██║█████╗  ██║     ██║   ██║ ╚███╔╝ ██║  ██║██████╔╝");
+    Information("╚════██║██╔══╝  ██║▄▄ ██║   ██╔══██║██╔═══╝ ██╔═══╝ ██║██║╚██╗██║██╔══╝  ██║     ██║   ██║ ██╔██╗ ██║  ██║██╔══██╗");
+    Information("███████║███████╗╚██████╔╝██╗██║  ██║██║     ██║██╗  ██║██║ ╚████║██║     ███████╗╚██████╔╝██╔╝ ██╗██████╔╝██████╔╝");
+    Information("╚══════╝╚══════╝ ╚══▀▀═╝ ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝     ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚═════╝ ");
     Information("");
 });
 
@@ -99,16 +99,16 @@ Task("__CreateNuGetPackages")
         Symbols = false,
         NoPackageAnalysis = true,
         Files = new [] {
-            new NuSpecContent { Source = "Seq.App.InfluxDB.dll", Target = "lib/net452" },
-			new NuSpecContent { Source = "InfluxData.Net.Common.dll", Target = "lib/net452" },
-			new NuSpecContent { Source = "InfluxData.Net.InfluxDb.dll", Target = "lib/net452" },
-			new NuSpecContent { Source = "InfluxData.Net.Kapacitor.dll", Target = "lib/net452" },
-			new NuSpecContent { Source = "Microsoft.Threading.Tasks.dll", Target = "lib/net452" },
-			new NuSpecContent { Source = "Microsoft.Threading.Tasks.Extensions.Desktop.dll", Target = "lib/net452" },
-			new NuSpecContent { Source = "Microsoft.Threading.Tasks.Extensions.dll", Target = "lib/net452" },
-			new NuSpecContent { Source = "Newtonsoft.Json.dll", Target = "lib/net452" },
-			new NuSpecContent { Source = "System.Net.Http.Extensions.dll", Target = "lib/net452" },
-			new NuSpecContent { Source = "System.Net.Http.Primitives.dll", Target = "lib/net452" }
+            new NuSpecContent { Source = "Seq.App.InfluxDB.dll", Target = "lib/net45" },
+			new NuSpecContent { Source = "InfluxData.Net.Common.dll", Target = "lib/net45" },
+			new NuSpecContent { Source = "InfluxData.Net.InfluxDb.dll", Target = "lib/net45" },
+			new NuSpecContent { Source = "InfluxData.Net.Kapacitor.dll", Target = "lib/net45" },
+			new NuSpecContent { Source = "Microsoft.Threading.Tasks.dll", Target = "lib/net45" },
+			new NuSpecContent { Source = "Microsoft.Threading.Tasks.Extensions.Desktop.dll", Target = "lib/net45" },
+			new NuSpecContent { Source = "Microsoft.Threading.Tasks.Extensions.dll", Target = "lib/net45" },
+			new NuSpecContent { Source = "Newtonsoft.Json.dll", Target = "lib/net45" },
+			new NuSpecContent { Source = "System.Net.Http.Extensions.dll", Target = "lib/net45" },
+			new NuSpecContent { Source = "System.Net.Http.Primitives.dll", Target = "lib/net45" }
         }
     });
     
