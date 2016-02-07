@@ -147,9 +147,6 @@ namespace Seq.App.InfluxDB
                     Timestamp = evt.TimestampUtc
                 };
 
-                Log.Information("Writing to InfluxDB {@Point}", pointToWrite);
-
-
                 _pointsCollection.Add(pointToWrite);
             }
             catch (Exception ex)
