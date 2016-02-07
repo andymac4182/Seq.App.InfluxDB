@@ -5,11 +5,11 @@
     <version>$version$</version>
     <authors>Andrew McClenaghan</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>The InfluxDB app for Seq (http://getseq.net) sends the number of events to InfluxDB.</description>
+    <description>The InfluxDB app for Seq (http://getseq.net) sends the events to InfluxDB.</description>
     <language>en-US</language>
     <projectUrl>https://github.com/andymac4182/Seq.App.InfluxDB</projectUrl>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
-    <iconUrl>http://getseq.net/images/apps/seq-app-email.png</iconUrl>
+    <iconUrl>https://s3-ap-southeast-2.amazonaws.com/29bbb922-8c24-4317-b7e8-6ef10e4a1f22/seq_app_influxdb/NugetLogo.png</iconUrl>
     <tags>seq-app seq serilog events influxdb</tags>
   </metadata>
 </package>
